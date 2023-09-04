@@ -13,4 +13,10 @@ public class SelfProductService implements ProductService {
         return null;
         // return new Product();
     }
+
+    @Override
+    public GenericProductDTO createProduct(GenericProductDTO product) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createProduct'");
+    }
 }

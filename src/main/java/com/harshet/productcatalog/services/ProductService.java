@@ -6,4 +6,8 @@ import com.harshet.productcatalog.models.Product;
 public interface ProductService {
 
     GenericProductDTO getProductById(Long Id);
+
+    GenericProductDTO createProduct(GenericProductDTO product);
+
+    GenericProductDTO deleteProductById(Long Id);
 }

@@ -15,6 +15,7 @@ public class FakeStoreProductService implements ProductService {
     private RestTemplateBuilder restTemplateBuilder;
 
     private String getProductRequestURL = "https://fakestoreapi.com/products/{id}";
+    private String postProductRequestURL = "https://fakestoreapi.com/products";
 
     public FakeStoreProductService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplateBuilder = restTemplateBuilder;
@@ -34,7 +35,23 @@ public class FakeStoreProductService implements ProductService {
         product.setPrice(fakeStoreProduct.getPrice());
         product.setTitle(fakeStoreProduct.getTitle());
         product.setCategory(fakeStoreProduct.getCategory());
+        product.setId(fakeStoreProduct.getId());
         return product;
     }
 
+    @Override
+    public GenericProductDTO createProduct(GenericProductDTO productInfo) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<GenericProductDTO> response = restTemplate.postForEntity(postProductRequestURL, productInfo,
+                GenericProductDTO.class);
+        return response.getBody();
+
+    }
+
+    @Override
+    public GenericProductDTO deleteProductById(Long Id) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        // return restTemplate.delete(getProductRequestURL,GenericProductDTO.class,Id);
+        return null;
+    }
 }
