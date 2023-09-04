@@ -1,5 +1,5 @@
 package com.harshet.productcatalog.models;
 
-public class Base{
+public class BaseModel {
 
 }
