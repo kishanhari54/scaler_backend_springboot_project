@@ -22,7 +22,7 @@ public class FakeStoreProductService implements ProductService {
 
     private RestTemplateBuilder restTemplateBuilder;
 
-    private String getAllProductRequestURL = "https://fakestoreapi.com/products";
+    private String productRequestBaseURl = "https://fakestoreapi.com/products";
     private String getProductRequestURL = "https://fakestoreapi.com/products/{id}";
     private String postProductRequestURL = "https://fakestoreapi.com/products";
 
@@ -32,26 +32,59 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public List<GenericProductDTO> getAllProducts() {
-        List<GenericProductDTO> list = new ArrayList<>();
+
         RestTemplate restTemplate = restTemplateBuilder.build();
+        // The Below wont work , because of "Erasure" - the type is lost during runtime
+        // and only checked in compile time.
+        // ResponseEntity<List<FakeStoreProductData>> response =
+        // restTemplate.getForEntity(productRequestBaseURl,
+        // List<FakeStoreProductData.class>);
+        ResponseEntity<FakeStoreProductData[]> response = restTemplate.getForEntity(productRequestBaseURl,
+                FakeStoreProductData[].class);
 
-        ResponseEntity<List<FakeStoreProductData>> response = restTemplate.exchange(getAllProductRequestURL,
-                HttpMethod.GET,
-                null, new ParameterizedTypeReference<List<FakeStoreProductData>>() {
-                });
+        List<GenericProductDTO> list = new ArrayList<>();
 
-        List<FakeStoreProductData> fakeStoreProducts = response.getBody();
-        for (FakeStoreProductData product : fakeStoreProducts) {
+        for (FakeStoreProductData fakeStoreProduct : response.getBody()) {
             GenericProductDTO genericProduct = new GenericProductDTO();
-            genericProduct.setImage(product.getImage());
-            genericProduct.setDescription(product.getDescription());
-            genericProduct.setPrice(product.getPrice());
-            genericProduct.setTitle(product.getTitle());
-            genericProduct.setCategory(product.getCategory());
-            genericProduct.setId(product.getId());
+            genericProduct.setImage(fakeStoreProduct.getImage());
+            genericProduct.setDescription(fakeStoreProduct.getDescription());
+            genericProduct.setPrice(fakeStoreProduct.getPrice());
+            genericProduct.setTitle(fakeStoreProduct.getTitle());
+            genericProduct.setCategory(fakeStoreProduct.getCategory());
+            genericProduct.setId(fakeStoreProduct.getId());
             list.add(genericProduct);
         }
+
         return list;
+
+        /*
+         * List<GenericProductDTO> list = new ArrayList<>();
+         * RestTemplate restTemplate = restTemplateBuilder.build();
+         * 
+         * /*
+         * ResponseEntity<List<FakeStoreProductData>> response =
+         * restTemplate.exchange(getAllProductRequestURL,
+         * HttpMethod.GET,
+         * null, new ParameterizedTypeReference<List<FakeStoreProductData>>() {
+         * });
+         * /
+         * ResponseEntity<FakeStoreProductData[]> response =
+         * restTemplate.getForEntity(productRequestBaseURl,
+         * FakeStoreProductData[].class);
+         * 
+         * FakeStoreProductData[] fakeStoreProducts = response.getBody();
+         * for (FakeStoreProductData product : fakeStoreProducts) {
+         * GenericProductDTO genericProduct = new GenericProductDTO();
+         * genericProduct.setImage(product.getImage());
+         * genericProduct.setDescription(product.getDescription());
+         * genericProduct.setPrice(product.getPrice());
+         * genericProduct.setTitle(product.getTitle());
+         * genericProduct.setCategory(product.getCategory());
+         * genericProduct.setId(product.getId());
+         * list.add(genericProduct);
+         * }
+         * return list;
+         */
     }
 
     @Override
