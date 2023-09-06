@@ -66,8 +66,9 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public GenericProductDTO deleteProductById(@PathVariable("id") Long id) {
-        return this.productService.deleteProductById(id);
+    public ResponseEntity<GenericProductDTO> deleteProductById(@PathVariable("id") Long id) {
+        return new ResponseEntity<GenericProductDTO>(this.productService.deleteProductById(id), HttpStatus.OK);
+        // return this.productService.deleteProductById(id);
     }
 
     /*
