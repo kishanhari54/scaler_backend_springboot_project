@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.harshet.exceptions.NotFoundException;
 import com.harshet.productcatalog.dtos.FakeStoreProductData;
 import com.harshet.productcatalog.dtos.GenericProductDTO;
 import com.harshet.productcatalog.models.Product;
@@ -92,12 +93,15 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public GenericProductDTO getProductById(Long Id) {
+    public GenericProductDTO getProductById(Long Id) throws NotFoundException {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductData> response = restTemplate.getForEntity(getProductRequestURL,
                 FakeStoreProductData.class, Id); // Id is the variable being
         // passed
         FakeStoreProductData fakeStoreProduct = response.getBody();
+        if (fakeStoreProduct == null) {
+            throw new NotFoundException("Product With Id: " + Id + "Does Not Exist");
+        }
         return this.convertFakeStoretoGenericProduct(fakeStoreProduct);
     }
 
