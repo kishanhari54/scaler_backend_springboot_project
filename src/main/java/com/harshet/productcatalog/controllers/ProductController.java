@@ -1,5 +1,6 @@
 package com.harshet.productcatalog.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,27 +40,27 @@ public class ProductController {
      */
 
     @GetMapping
-    public String getAllProducts() {
-        return "Products";
+    public List<GenericProductDTO> getAllProducts() {
+        return this.productService.getAllProducts();
     }
 
     @GetMapping("/{id}")
     public GenericProductDTO getProductById(@PathVariable("id") Long id) {
         return this.productService.getProductById(id);
-        // return "Id is " + id;
     }
 
     @PostMapping
     public GenericProductDTO createProduct(@RequestBody GenericProductDTO product) {
         return this.productService.createProduct(product);
-        // return "Created Product " + UUID.randomUUID();
     }
 
     @PutMapping("{id}")
-    public void updateProductById() {
+    public GenericProductDTO updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDTO product) {
+        return this.productService.updateProductById(id, product);
     }
 
     @DeleteMapping("{id}")
-    public void deleteProductById() {
+    public GenericProductDTO deleteProductById(@PathVariable("id") Long id) {
+        return this.productService.deleteProductById(id);
     }
 }
