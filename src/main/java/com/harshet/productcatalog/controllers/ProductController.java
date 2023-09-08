@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
 
-import com.harshet.exceptions.NotFoundException;
 import com.harshet.productcatalog.dtos.ExceptionDTO;
 import com.harshet.productcatalog.dtos.GenericProductDTO;
+import com.harshet.productcatalog.exceptions.NotFoundException;
 import com.harshet.productcatalog.services.ProductService;
 
 @RestController
@@ -79,6 +79,14 @@ public class ProductController {
      * return new ResponseEntity(
      * new ExceptionDTO(HttpStatus.NOT_FOUND, ex.getMessage()),
      * HttpStatus.NOT_FOUND);
+     * }
+     */
+
+    /*
+     * @ExceptionHandler()
+     * private ExceptionDTO handleException(Exception ex) {
+     * System.out.println("DEFAULT");
+     * return new ExceptionDTO(HttpStatus.NOT_FOUND, ex.getMessage());
      * }
      */
 

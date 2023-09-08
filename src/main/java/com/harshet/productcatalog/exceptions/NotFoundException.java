@@ -1,4 +1,4 @@
-package com.harshet.exceptions;
+package com.harshet.productcatalog.exceptions;
 
 public class NotFoundException extends Exception {
 

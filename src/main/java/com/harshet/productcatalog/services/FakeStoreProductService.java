@@ -13,9 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.harshet.exceptions.NotFoundException;
 import com.harshet.productcatalog.dtos.FakeStoreProductData;
 import com.harshet.productcatalog.dtos.GenericProductDTO;
+import com.harshet.productcatalog.exceptions.NotFoundException;
 import com.harshet.productcatalog.models.Product;
 
 @Service("fakeStoreProductService")

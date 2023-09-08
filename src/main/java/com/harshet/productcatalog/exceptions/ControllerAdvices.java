@@ -1,4 +1,4 @@
-package com.harshet.exceptions;
+package com.harshet.productcatalog.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
