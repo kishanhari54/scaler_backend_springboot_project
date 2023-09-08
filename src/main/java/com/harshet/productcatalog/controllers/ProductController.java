@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public GenericProductDTO getProductById(@PathVariable("id") Long id) throws Exception {
+    public GenericProductDTO getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return this.productService.getProductById(id);
     }
 
@@ -81,4 +81,5 @@ public class ProductController {
      * HttpStatus.NOT_FOUND);
      * }
      */
+
 }
