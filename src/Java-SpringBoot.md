@@ -26,7 +26,7 @@
         *  We could have created our own SQL queries and hit the DB - but this is tedious effort and  we like to have other solutions ,where we get ORM for help
              * ORM - Object Relationship Mapping.
 
-# Representing Inheritance in Entity.
+# Representing Inheritance in Entity.(DB)
 
   *  Mapped Super Class
             
@@ -49,3 +49,17 @@
                 **  Will create only one giant table
                 **  Table created will have columns of parent class and all of its child tables as well.
                 ** It is fast , but not all records are filled for each record ,hence wastage of storage happens.
+
+# Cardinality Mappings in Databases
+  * Different Cardinality
+  * 
+    1. One  : One
+    2. One  : Many
+    3. Many : One
+    4. Many : Many
+
+    *   Example  :     1   : 1
+                    Product:Category
+                       M   : 1
+    *   To Define Same relation between two different Entity, We need to pass (mappedBy) as input to OneToMany Annotation
+    *   To Fetch only Parent entity and Child Entity :use @OneToMany(fetchType=EAGER) with child entity, by default its "lazy"
