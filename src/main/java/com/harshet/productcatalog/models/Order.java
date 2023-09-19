@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity(name = "orders")
 public class Order extends BaseModel {
 
     @ManyToMany

@@ -69,3 +69,10 @@
 ---
 # Cascading
   *   Whenever we delete a item , its related items should delete , similarly when we create a object and save it , it needs to save child tables as well first right , hence we define cascaseType as persist.
+
+# Repository
+  *   Client Request <--> Controller <--> Services <--> Repository <--> Models.
+  *   Repository is a Class which allows CRUD on DB.
+  *   The Class which interact with DB Models.
+    ## Spring Data JPA
+    * Spring Data JPA removes hard work to create SQL Queries ,by creating itself.   
