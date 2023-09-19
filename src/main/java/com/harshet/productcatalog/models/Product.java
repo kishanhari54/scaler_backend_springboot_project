@@ -1,7 +1,10 @@
 package com.harshet.productcatalog.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Setter;
 
@@ -15,7 +18,9 @@ public class Product extends BaseModel {
     // 1: 1 --> Left to Right...
     // M: 1 --> Right to Left...
     // M:1 --> Answer
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.PERSIST })
+    @JoinColumn(name = "category")
     private Category category;
-    private double price;
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    private Price price;
 }

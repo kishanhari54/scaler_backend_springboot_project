@@ -63,3 +63,9 @@
                        M   : 1
     *   To Define Same relation between two different Entity, We need to pass (mappedBy) as input to OneToMany Annotation
     *   To Fetch only Parent entity and Child Entity :use @OneToMany(fetchType=EAGER) with child entity, by default its "lazy"
+    *   Whenever we create Cardinality, we could use JOIN_COLUMN to define Foreign Key Constraints (name ,mapping table for many to many etc..).
+
+
+---
+# Cascading
+  *   Whenever we delete a item , its related items should delete , similarly when we create a object and save it , it needs to save child tables as well first right , hence we define cascaseType as persist.
